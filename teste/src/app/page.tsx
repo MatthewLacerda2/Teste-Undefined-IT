@@ -1,57 +1,29 @@
 "use client";
 
-import { useRouter } from "next/navigation"; // Next.js router for navigation
-import React, { useState } from "react";
+import { useState } from "react";
 import Button from "../components/Button";
+import ForgotPasswordModalContent from "../components/ForgotPasswordModalContent";
 import InputField from "../components/InputField";
 import Logo from "../components/Logo";
+import Modal from "../components/Modal";
+import SuccessModalContent from "../components/SuccessModalContent";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const router = useRouter(); // Initialize router
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const validateEmail = (value: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value);
+  const handleNext = () => {
+    setShowForgotPasswordModal(false);
+    setShowSuccessModal(true);
   };
 
-  const validatePassword = (value: string) => {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return passwordRegex.test(value);
-  };
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setEmail(value);
-
-    if (value === "") {
-      setEmailError("");
-    } else if (!validateEmail(value)) {
-      setEmailError(
-        "E-mail inválido. Insira um endereço de e-mail no formato correto."
-      );
-    } else {
-      setEmailError("");
-    }
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setPassword(value);
-
-    if (value === "") {
-      setPasswordError("");
-    } else if (!validatePassword(value)) {
-      setPasswordError(
-        "Senha inválida. Verifique se a senha tem pelo menos 8 caracteres com letras maiúsculas, minúsculas, números e caracteres especiais, e tente novamente."
-      );
-    } else {
-      setPasswordError("");
-    }
+  const handleCloseModals = () => {
+    setShowForgotPasswordModal(false);
+    setShowSuccessModal(false);
   };
 
   return (
@@ -64,7 +36,7 @@ export default function LoginPage() {
             type="email"
             placeholder="mail.example@gmail.com"
             value={email}
-            onChange={handleEmailChange}
+            onChange={(e) => setEmail(e.target.value)}
             error={emailError}
           />
           <InputField
@@ -72,14 +44,14 @@ export default function LoginPage() {
             type="password"
             placeholder="********"
             value={password}
-            onChange={handlePasswordChange}
+            onChange={(e) => setPassword(e.target.value)}
             error={passwordError}
           />
           <div className="text-left mt-4">
             <a
               href="#"
               className="text-blue-500 hover:text-blue-700 text-sm font-bold"
-              onClick={() => router.push("/forgot-password")} // Navigate to forgot-password page
+              onClick={() => setShowForgotPasswordModal(true)}
             >
               Esqueci minha senha
             </a>
@@ -91,6 +63,21 @@ export default function LoginPage() {
           </div>
         </form>
       </div>
+
+      {showForgotPasswordModal && (
+        <Modal onClose={handleCloseModals}>
+          <ForgotPasswordModalContent
+            onSubmit={handleNext}
+            onClose={handleCloseModals}
+          />
+        </Modal>
+      )}
+
+      {showSuccessModal && (
+        <Modal onClose={handleCloseModals}>
+          <SuccessModalContent onClose={handleCloseModals} />
+        </Modal>
+      )}
     </div>
   );
 }
