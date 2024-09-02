@@ -24,9 +24,11 @@ export default function LoginPage() {
   };
 
   const handleCloseModals = () => {
+    if (showSuccessModal) {
+      router.push("/reset-link");
+    }
     setShowForgotPasswordModal(false);
     setShowSuccessModal(false);
-    router.push("/reset-link");
   };
 
   return (

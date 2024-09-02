@@ -21,14 +21,14 @@ export default function PasswordResetPage() {
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    setPasswordError(""); // Clear error when user starts typing
+    setPasswordError("");
   };
 
   const handleConfirmPasswordChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setConfirmPassword(e.target.value);
-    setConfirmPasswordError(""); // Clear error when user starts typing
+    setConfirmPasswordError("");
   };
 
   const handleSubmit = () => {
