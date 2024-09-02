@@ -1,0 +1,49 @@
+name: build-and-test
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+    paths:
+      - "src/**"
+      - "**/*.ts"
+      - "**/*.tsx"
+      - "**/*.js"
+      - "**/*.json"
+
+jobs:
+  build-and-test-nextjs:
+    name: Build and Test Next.js
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Next.js App
+        run: npm run build
+
+      - name: Check Job Status and Update Pull Request
+        if: failure()
+        run: |
+          echo "::error::One or more jobs failed. Please fix the issues before marking this pull request as ready for review."
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Content-Type: application/json" \
+               -d '{"body": "Build-and-test failed! Fix the issues before merging."}' \
+               "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
+          curl -X PATCH -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+               -H "Content-Type: application/json" \
+               -d '{"draft": true}' \
+               "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}"
