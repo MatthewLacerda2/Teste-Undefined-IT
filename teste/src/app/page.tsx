@@ -39,11 +39,21 @@ export default function LoginPage() {
     }
   };
 
+  const handleLogin = () => {
+    if (email === "undefined@gmail.com" && password === "@QWEasd123") {
+      alert("login successful");
+      router.push("/home");
+    } else {
+      setEmailError("E-mail ou senha inválidos");
+      setPasswordError("E-mail ou senha inválidos");
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-white p-4">
       <Logo />
       <div className="w-full max-w-xs mt-8">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <InputField
             label="E-mail"
             type="email"
@@ -72,7 +82,7 @@ export default function LoginPage() {
           <br />
           <br />
           <div className="flex items-center justify-between">
-            <Button text="Entrar" />
+            <Button text="Entrar" onClick={handleLogin} />
           </div>
         </form>
       </div>
