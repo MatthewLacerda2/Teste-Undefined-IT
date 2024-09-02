@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "../components/Button";
 import ForgotPasswordModalContent from "../components/ForgotPasswordModalContent";
@@ -15,6 +16,7 @@ export default function LoginPage() {
   const [passwordError, setPasswordError] = useState("");
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const router = useRouter();
 
   const handleNext = () => {
     setShowForgotPasswordModal(false);
@@ -24,6 +26,7 @@ export default function LoginPage() {
   const handleCloseModals = () => {
     setShowForgotPasswordModal(false);
     setShowSuccessModal(false);
+    router.push("/reset-link");
   };
 
   return (

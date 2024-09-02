@@ -80,7 +80,7 @@ export default function ForgotPasswordPage() {
 
       {showSuccessScreen && (
         <div className="flex-grow">
-          <SuccessScreen onClose={() => router.push("/")} />
+          <SuccessScreen onClose={() => router.push("/reset-link")} />
         </div>
       )}
     </div>
