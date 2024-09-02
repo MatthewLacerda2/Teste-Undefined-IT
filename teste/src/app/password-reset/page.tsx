@@ -3,7 +3,7 @@
 import Button from "@/components/Button";
 import InputField from "@/components/InputField";
 import Logo from "@/components/Logo";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 
 export default function PasswordResetPage() {
@@ -11,7 +11,6 @@ export default function PasswordResetPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  const router = useRouter();
 
   const validatePassword = (value: string) => {
     const passwordRegex =
@@ -49,7 +48,7 @@ export default function PasswordResetPage() {
       setConfirmPasswordError("As senhas não coincidem.");
     } else {
       alert("Senha alterada. Faça login.");
-      router.push("/reset-link");
+      redirect("/reset-link");
     }
   };
 

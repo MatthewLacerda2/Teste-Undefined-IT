@@ -1,14 +1,10 @@
-"use client";
-
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default function ResetLinkPage() {
-  const router = useRouter();
-
   const handleNextClick = () => {
-    router.push("/password-reset");
+    redirect("/password-reset");
   };
 
   return (
