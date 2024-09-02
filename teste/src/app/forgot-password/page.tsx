@@ -2,7 +2,7 @@
 
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowLeft";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
@@ -12,7 +12,6 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [showSuccessScreen, setShowSuccessScreen] = useState(false);
-  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -51,7 +50,7 @@ export default function ForgotPasswordPage() {
           <div className="p-4">
             <div className="flex items-center p-4">
               <button
-                onClick={() => router.back()}
+                onClick={() => redirect("/")}
                 title="Voltar"
                 className="text-sm text-black flex items-center mr-2"
               >
@@ -80,7 +79,7 @@ export default function ForgotPasswordPage() {
 
       {showSuccessScreen && (
         <div className="flex-grow">
-          <SuccessScreen onClose={() => router.push("/reset-link")} />
+          <SuccessScreen onClose={() => redirect("/reset-link")} />
         </div>
       )}
     </div>
