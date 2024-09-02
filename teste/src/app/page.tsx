@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation"; // Next.js router for navigation
 import React, { useState } from "react";
 import Button from "../components/Button";
 import InputField from "../components/InputField";
@@ -10,6 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const router = useRouter(); // Initialize router
 
   const validateEmail = (value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -77,6 +79,7 @@ export default function LoginPage() {
             <a
               href="#"
               className="text-blue-500 hover:text-blue-700 text-sm font-bold"
+              onClick={() => router.push("/forgot-password")} // Navigate to forgot-password page
             >
               Esqueci minha senha
             </a>
