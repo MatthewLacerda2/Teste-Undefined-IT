@@ -1,6 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation"; // Use router for navigation
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons/faArrowLeft";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import Button from "../../components/Button";
 import InputField from "../../components/InputField";
@@ -43,29 +45,44 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-white p-4">
+    <div className="min-h-screen flex flex-col bg-white">
       {!showSuccessScreen && (
-        <div className="w-full max-w-xs mt-8">
-          <button onClick={() => router.back()} className="mb-4">
-            ← Voltar
-          </button>
-          <h2 className="text-xl font-bold mb-4">Recuperar senha</h2>
-          <p className="mb-4">
-            Para recuperar sua senha, digite o e-mail cadastrado.
-          </p>
-          <InputField
-            label="E-mail"
-            type="email"
-            placeholder="mail.example@gmail.com"
-            value={email}
-            onChange={handleEmailChange}
-            error={emailError}
-          />
-          <Button text="Enviar" onClick={handleSubmit} />
-        </div>
+        <>
+          <div className="p-4">
+            <div className="flex items-center p-4">
+              <button
+                onClick={() => router.back()}
+                title="Voltar"
+                className="text-sm text-black flex items-center mr-2"
+              >
+                <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
+              </button>
+              <h2 className="text-xl font-bold">Recuperar senha</h2>
+            </div>
+
+            <p className="mb-4">
+              Para recuperar sua senha, digite o e-mail cadastrado.
+            </p>
+            <InputField
+              label="E-mail"
+              type="email"
+              placeholder="mail.example@gmail.com"
+              value={email}
+              onChange={handleEmailChange}
+              error={emailError}
+            />
+          </div>
+          <div className="mt-auto p-4">
+            <Button text="Enviar" onClick={handleSubmit} />
+          </div>
+        </>
       )}
 
-      {showSuccessScreen && <SuccessScreen onClose={() => router.push("/")} />}
+      {showSuccessScreen && (
+        <div className="flex-grow">
+          <SuccessScreen onClose={() => router.push("/")} />
+        </div>
+      )}
     </div>
   );
 }
