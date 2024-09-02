@@ -31,6 +31,14 @@ export default function LoginPage() {
     setShowSuccessModal(false);
   };
 
+  const handleForgotPasswordClick = () => {
+    if (window.innerWidth <= 768) {
+      router.push("/forgot-password");
+    } else {
+      setShowForgotPasswordModal(true);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-white p-4">
       <Logo />
@@ -56,7 +64,7 @@ export default function LoginPage() {
             <a
               href="#"
               className="text-blue-500 hover:text-blue-700 text-sm font-bold"
-              onClick={() => setShowForgotPasswordModal(true)}
+              onClick={handleForgotPasswordClick}
             >
               Esqueci minha senha
             </a>
