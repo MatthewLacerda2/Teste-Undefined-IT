@@ -17,7 +17,7 @@ export default function ResetLinkPage() {
         <FontAwesomeIcon icon={faLink} size="3x" className="text-white" />
       </div>
 
-      <div className="w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl p-4">
+      <div className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl p-4">
         <div className="bg-white rounded-lg p-6 mt-8 border border-black">
           <p className="mb-4">Olá,</p>
           <br />
