@@ -4,12 +4,18 @@ interface InputFieldProps {
   label: string;
   type: string;
   placeholder: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
   label,
   type,
   placeholder,
+  value,
+  onChange,
+  error,
 }) => {
   return (
     <div className="mb-6">
@@ -20,8 +26,13 @@ const InputField: React.FC<InputFieldProps> = ({
       <input
         type={type}
         placeholder={placeholder}
-        className="border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-600 font-bold leading-tight focus:outline-none"
+        value={value}
+        onChange={onChange}
+        className={`border ${
+          error ? "border-red-500" : "border-gray-300"
+        } rounded-lg w-full py-2 px-3 text-gray-600 font-bold leading-tight focus:outline-none`}
       />
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
   );
 };
