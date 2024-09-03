@@ -6,7 +6,9 @@ Como rodar:
 
 Abra o terminal
 Entre na pasta 'teste'
-`npm ci`
+
+`npm i`
+
 `npm run dev`
 
 Credenciais para login:
