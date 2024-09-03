@@ -1,8 +1,6 @@
-"use client";
-
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/router"; // Use useRouter hook instead of importing router directly
+import router from "next/router";
 import Button from "../../components/Button";
 
 interface SuccessScreenProps {
@@ -10,14 +8,12 @@ interface SuccessScreenProps {
 }
 
 export default function SuccessScreen({ onClose }: SuccessScreenProps) {
-  const router = useRouter(); // Initialize the useRouter hook
-
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <div className="p-4">
         <div className="flex items-center p-4">
           <button
-            onClick={() => router.push("/reset-link")} // Use router.push for navigation
+            onClick={() => router.back()}
             aria-label="Voltar"
             className="text-sm text-black flex items-center mr-2"
           >
