@@ -1,6 +1,6 @@
 "use client";
 
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import Button from "../components/Button";
 import ForgotPasswordModalContent from "../components/ForgotPasswordModalContent";
@@ -10,6 +10,7 @@ import Modal from "../components/Modal";
 import SuccessModalContent from "../components/SuccessModalContent";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -24,7 +25,7 @@ export default function LoginPage() {
 
   const handleCloseModals = () => {
     if (showSuccessModal) {
-      redirect("/reset-link");
+      router.push("/reset-link");
     }
     setShowForgotPasswordModal(false);
     setShowSuccessModal(false);
@@ -32,7 +33,7 @@ export default function LoginPage() {
 
   const handleForgotPasswordClick = () => {
     if (window.innerWidth <= 768) {
-      redirect("/forgot-password");
+      router.push("/forgot-password");
     } else {
       setShowForgotPasswordModal(true);
     }
@@ -41,7 +42,7 @@ export default function LoginPage() {
   const handleLogin = () => {
     if (email === "undefined@gmail.com" && password === "@QWEasd123") {
       alert("login successful");
-      redirect("/home");
+      router.push("/home");
     } else {
       setEmailError("E-mail ou senha inválidos");
       setPasswordError("E-mail ou senha inválidos");
