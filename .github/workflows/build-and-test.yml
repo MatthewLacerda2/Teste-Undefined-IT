@@ -26,7 +26,7 @@ jobs:
       - name: Build-and-test
         working-directory: .\teste
         run: |
-          npm ci
+          npm i
           npm run lint
           npm test
           npm run build

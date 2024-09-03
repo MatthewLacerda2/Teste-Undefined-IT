@@ -7,7 +7,6 @@ out/
 build/
 
 # Tailwind
-*.css
 *.scss
 *.sass
 
