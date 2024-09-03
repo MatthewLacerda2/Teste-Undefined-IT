@@ -11,7 +11,7 @@ export default function HomePage() {
           className="text-gray-800 mb-4"
         />
         <h1 className="text-2xl font-bold mb-4">Home</h1>
-        <p className="text-gray-700">You're logged in</p>
+        <p className="text-gray-700">Login successful</p>
       </div>
     </div>
   );
